@@ -1,0 +1,45 @@
+<?php
+    echo $this->headScript()
+             ->prependFile($this->basePath().'/js/libToggle.js');
+?>
+<div class="orm_wrapper"></div>
+<script type="text/javascript">
+    var ormModel = function()
+    {
+        var self = this;
+        var dataObj;
+        var className = 'Application\Orm\ApplicationOrm';
+        dataObj = {'class':className};
+        var request = function()
+        {
+            $.ajax(
+            {
+               url: '/ajax',
+               type: 'POST',
+               data: dataObj,
+               success: function(json)
+               {
+            	   if(json)
+            	   {
+            		   $('.orm_wrapper').html(json.answer.view);
+            	   }
+               }
+            });
+        }
+        this.getByDefault = function()
+        {
+        	dataObj = {'class':className};
+        	request();
+        }
+        /*this.getByLibraryId = function(libId)
+        {
+            dataObj = {
+            		'class':className,
+            		'libId':libId
+            }
+            request();
+        }*/
+    }
+    var orm = new ormModel();
+    orm.getByDefault();
+</script>

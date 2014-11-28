@@ -1,0 +1,30 @@
+<?php
+    $booksArray = array();
+    foreach($this->libraries as $key => $library)
+    {
+        $books = $library->getBooks();
+        $booksArray[$library->getId()] = array();
+        foreach($books as $k => $book)
+        {
+            $booksArray[$library->getId()][$k] = '<div class="row"><div class="col-md-2">'.$book->getId().'</div><div class="col-md-2">'.$book->getTitle().'</div><div class="col-md-2">'.$book->getAuthor().'</div></div>';
+        }    
+    }
+?>
+<div class="row">
+    <select id="libraries" class="">
+    <?php foreach($this->libraries as $library):?>
+        <option value = "<?php echo $library->getId(); ?>"><?php echo $library->getTitle(); ?></option>
+    <?php endforeach; ?>
+    </select>
+</div>
+<div class="row booksList_title">
+    <div class="row"><div class="col-md-2">ID</div><div class="col-md-2">Название</div><div class="col-md-2">Автор</div></div>
+</div>
+<div class="row booksList">
+</div>
+<script type="text/javascript">
+    $('#libraries').libToggle();
+    $('#libraries').libToggle('setBooksList',<?php echo json_encode($booksArray);?>);
+    $('#libraries').libToggle('setElementToAttach','.booksList'); 
+    $('#libraries').libToggle('leafOver');
+</script>

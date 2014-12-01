@@ -26,19 +26,36 @@
                }
             });
         }
+        var requestEntity = function()
+        {
+            $.ajax(
+            {
+               url: '/ajax',
+               type: 'POST',
+               data: dataObj,
+               success: function(json)
+               {
+            	   if(json)
+            	   {
+            	   }
+               }
+            });
+        }
         this.getByDefault = function()
         {
         	dataObj = {'class':className};
         	request();
         }
-        /*this.getByLibraryId = function(libId)
+        this.getLibraryById = function(libId)
         {
             dataObj = {
             		'class':className,
-            		'libId':libId
+            		'entity': 'library',
+            		'method': 'getLibrary',
+                	'methodParams': {'id':libId }	
             }
-            request();
-        }*/
+            requestEntity();
+        }
     }
     var orm = new ormModel();
     orm.getByDefault();

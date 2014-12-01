@@ -22,7 +22,8 @@ class IndexController extends AbstractActionController
     
     public function indexAction() 
     {
-        
+        //$a = $this->getOrm()->invokeEntity('library','getLibrary',array('id' => 4));
+       // var_dump($a);
     }
     //это для теста напрямую, не через аякс
     /*protected function getOrm()

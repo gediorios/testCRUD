@@ -8,6 +8,7 @@ class applicationBook
     protected $title;
     protected $author;
     protected $date_added;
+    protected $templates = array();
     
     public function __construct(array $options = null) 
     {
@@ -33,7 +34,10 @@ class applicationBook
         }
         $this->$method($value);
     }
-    
+    public function getTemplateFor($method)
+    {
+    	return $this->templates[$method];
+    }
     public function setOptions(array $options) 
     {
         $methods = get_class_methods($this);

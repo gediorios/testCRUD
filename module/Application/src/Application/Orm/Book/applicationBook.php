@@ -1,14 +1,12 @@
 <?php
 namespace Application\Orm\Book;
 
-class applicationBook 
+class applicationBook
 {
-
     protected $id;
     protected $title;
     protected $author;
     protected $date_added;
-    protected $templates = array();
     
     public function __construct(array $options = null) 
     {
@@ -16,6 +14,7 @@ class applicationBook
         {
             $this->setOptions($options);
         }
+        
     }  
     public function __get($name)
     {
@@ -33,10 +32,6 @@ class applicationBook
            // throw new Exception('Invalid Method');
         }
         $this->$method($value);
-    }
-    public function getTemplateFor($method)
-    {
-    	return $this->templates[$method];
     }
     public function setOptions(array $options) 
     {

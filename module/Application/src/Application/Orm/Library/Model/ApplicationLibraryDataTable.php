@@ -9,9 +9,11 @@ use Zend\Db\Sql\Select;
 
 use Application\Orm\Library\ApplicationLibrary;
 use Application\Orm\Book\Model\ApplicationBookDataTable;
+use Application\Orm\Traites\entityRenderable;
 
 class ApplicationLibraryDataTable extends AbstractTableGateway
 {
+    use entityRenderable;
     protected $table;
     private $bookDataTable;
     

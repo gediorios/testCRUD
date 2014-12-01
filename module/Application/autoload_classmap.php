@@ -8,4 +8,5 @@ return array(
     'Application\Orm\Library\ApplicationLibrary' => __DIR__ . '/src/Application/Orm/Library/ApplicationLibrary.php',
     'Application\Orm\Library\Model\ApplicationLibraryDataTable' => __DIR__ . '/src/Application/Orm/Library/Model/ApplicationLibraryDataTable.php',
     'Application\Orm\ApplicationOrm' => __DIR__ . '/src/Application/Orm/ApplicationOrm.php',
+    'Application\Orm\Traites\entityRenderable' => __DIR__ . '/src/Application/Orm/Traites/entityRenderable.php'
 );

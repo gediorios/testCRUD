@@ -3,12 +3,10 @@ namespace Application\Orm\Library;
 
 class applicationLibrary
 {
-
     protected $id;
     protected $title;
     protected $books;
     protected $date_added;
-    protected $templates = array();
     
     public function __construct(array $options = null) 
     {
@@ -33,15 +31,6 @@ class applicationLibrary
            // throw new Exception('Invalid Method');
         }
         $this->$method($value);
-    }
-    public function getTemplateFor($method)
-    {
-        if(isset($this->templates[$method]))
-        {
-            return $this->templates[$method];
-        }
-        else return false;
-    	
     }
     public function setOptions(array $options) 
     {

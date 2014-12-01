@@ -7,11 +7,13 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Select;
 
+use Application\Orm\Traites\entityRenderable;
 
 use Application\Orm\Book\ApplicationBook;
 
 class ApplicationBookDataTable extends AbstractTableGateway
 {
+    use entityRenderable;
     protected $table;
     public function __construct(Adapter $adapter) 
     {

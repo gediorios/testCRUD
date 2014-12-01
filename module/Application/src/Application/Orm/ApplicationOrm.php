@@ -5,7 +5,6 @@ use Application\Orm\Library\Model\ApplicationLibraryDataTable;
 use Application\Orm\Book\Model\ApplicationBookDataTable;
 use Ajax\Model\ajaxInterFace;
 use Zend\View\Model\ViewModel;
-use Zend\Server\Reflection;
 
 class ApplicationOrm implements ajaxInterFace
 {
@@ -44,9 +43,15 @@ class ApplicationOrm implements ajaxInterFace
                 		$sortedParams[$pos] = $params[$value->name];
                 	}
                 }
-                if($reflection->hasMethod('getTemplateFor') && $obj->getTemplateFor($action) != false)
+                foreach($reflection->getTraitNames() as $key => $trait)
                 {
-                    $this->entityNeedRender = true;
+                	if($trait == 'Application\Orm\Traites\entityRenderable')
+                	{
+                	    if($reflection->hasMethod('getTemplateFor') && $obj->getTemplateFor($action) != false)
+                	    {
+                	    	$this->entityNeedRender = true;
+                	    }
+                	}
                 }
                 $sortedParams = implode($sortedParams);     
                 return $obj->$action($sortedParams);
@@ -69,11 +74,11 @@ class ApplicationOrm implements ajaxInterFace
             $result = $this->invokeEntity($post->entity,$post->method,$post->methodParams);
             if($this->entityNeedRender)
             {
-                $view = $this->getOrmViewModelFor($post->entity[$post->method],$result);
+                $view = $this->getOrmViewModelFor($post->entity->getEntityTemplateFor($post->method),$result);
             }
             else if(is_object($result))
             {
-                $view = array('message'=>'объект не требующий отрисовки');
+                $view = array('message'=>'объект не требует отрисовки');
             }
             else if(is_array($result))
             {
